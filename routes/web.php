@@ -17,19 +17,19 @@ Route::get('/auth/google/redirect', function () {
 
 Route::get('/auth/google/callback', function () {
     try {
-        /** @var OAuth2User $googleUser */
-        $googleUser = Socialite::driver('google')->user();
+        /** @var OAuth2User $google_user */
+        $google_user = Socialite::driver('google')->user();
     } catch (InvalidStateException $exception) {
         abort(400, $exception->getMessage());
     }
 
     $user = User::updateOrCreate([
-        'email' => $googleUser->email,
+        'email' => $google_user->email,
     ], [
-        'google_id' => $googleUser->id,
-        'name' => $googleUser->name,
-        'google_token' => $googleUser->token,
-        'google_refresh_token' => $googleUser->refreshToken,
+        'google_id' => $google_user->id,
+        'name' => $google_user->name,
+        'google_token' => $google_user->token,
+        'google_refresh_token' => $google_user->refreshToken,
     ]);
 
     Auth::login($user);
