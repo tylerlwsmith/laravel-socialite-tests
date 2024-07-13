@@ -12,15 +12,11 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that are not mass assignable.
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
